@@ -12,7 +12,8 @@ class AirbnbItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     listing_id = scrapy.Field()
-    name = scrapy.Field()
+    title = scrapy.Field()
+    country = scrapy.Field()
     city = scrapy.Field()
     neighborhood = scrapy.Field()
     lat = scrapy.Field()

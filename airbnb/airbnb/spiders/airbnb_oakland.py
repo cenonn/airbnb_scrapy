@@ -32,6 +32,7 @@ class AirbnbOaklandSpider(scrapy.Spider):
     def parse(self, response):
         data = json.loads(response.body)
         listing_data = data.get('explore_tabs')[0].get('sections')[0].get('listings')
+        country = str(data.get('metadata').get('geography').get('country'))
 
         for listing in listing_data:
             listing_item = AirbnbItem()
@@ -43,7 +44,8 @@ class AirbnbOaklandSpider(scrapy.Spider):
             rate_w_service = price.get('rate_with_service_fee').get('amount')
 
             listing_item['listing_id'] = listing_id
-            listing_item['name'] = str(details.get('name'))
+            listing_item['title'] = str(details.get('name'))
+            listing_item['country'] = country
             listing_item['city'] = str(details.get('localized_city'))
             listing_item['lat'] = details.get('lat')
             listing_item['lon'] = details.get('lon')
